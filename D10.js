@@ -11,7 +11,10 @@ REGOLE
 
 // ESERCIZIO A
   let sum = 10 + 20;
-
+ a = 10;
+ b= 20;
+ sum = a+b
+ console.log(sum)
 
 // ESERCIZIO B
  // Crea una variabile chiamata "random" e assegnaci un numero casuale tra 0 e 20 (deve essere generato dinamicamente a ogni esecuzione).
@@ -95,14 +98,39 @@ deleteOne("ciao", false);
 
   Es.: onlyLetters("I have 4 dogs") => ritorna "I have dogs"
 */
-
+function onlyLetters(str) {
+  return str.replace(/[0-9]/g, '');
+}
+console.log(onlyLetters('abc123'))
 /* ESERCIZIO 6
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
+function isThisAnEmail(str) {
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  return emailRegex.test(str);
+} 
+isThisAnEmail("name@example.com"); 
+isThisAnEmail("not an email"); 
+console.log(isThisAnEmail("name@example.com")); 
 
 /* ESERCIZIO 7
   Scrivi una funzione chiamata "whatDayIsIt" che ritorna il giorno della settimana corrente.
 */
+function whatDayIsIt() {
+const day = new Date().getDay();
+  const days = [
+    'Domenica',
+    'Lunedì',
+    'Martedì',
+    'Mercoledì',
+    'Giovedì',
+    'Venerdì',
+    'Sabato'
+  ];
+return days[day];
+}
+console.log(whatDayIsIt());
+
 
 /* ESERCIZIO 8
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
@@ -116,14 +144,38 @@ deleteOne("ciao", false);
       values: [3, 3, 4]
   }
 */
-
+function dice() {
+  return Math.floor(Math.random() * 6) + 1;
+}
+function rollTheDices(num) {
+  const values = [];
+  let sum = 0;
+  for (let i = 0; i < num; i++) {
+    const value = dice();
+    values.push(value);
+    sum += value;
+  }
+ return { sum, values };
+}
+console.log(rollTheDices(2));
 /* ESERCIZIO 9
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
+function howManyDays(date) {
 
+  const currentDate = new Date();
+  const diff = currentDate - date;
+const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+ return days;
+}
+console.log(howManyDays(new Date('2022-01-01')));
 /* ESERCIZIO 10
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
 */
+function isTodayMyBirthday() {
+  const currentDate = new Date();
+  return currentDate.getMonth() === 10 && currentDate.getDate() === 18;
+} console.log(isTodayMyBirthday());
 
 // Arrays & Oggetti
 
@@ -133,30 +185,64 @@ deleteOne("ciao", false);
   Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
   in esso la proprietà chiamata come la stringa passata come secondo parametro.
 */
+function deleteProp(obj, prop) {
+if (obj.hasOwnProperty(prop)) {
+    delete obj[prop];
+  }
+return obj;
+}
 
 /* ESERCIZIO 12
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
+function newestMovie(movies) {
+  const sortedMovies = movies.sort((a, b) => {
+    return b.Year - a.Year;
+  });
+  return sortedMovies[0];
+} console.log(newestMovie(movies));
 
 /* ESERCIZIO 13
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
+function countMovies(movies) {
+  return movies.length;
+} console.log(countMovies(movies));
 
 /* ESERCIZIO 14
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
 */
+function onlyTheYears(movies) {
+  const years = movies.map(movie => movie.Year);
+  return years;
+} console.log(onlyTheYears(movies));
 
 /* ESERCIZIO 15
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
 */
+function onlyInLastMillennium(movies) {
+const lastMillenniumMovies = movies.filter(movie => {
+const year = parseInt(movie.Year, 10);
+    return year <= 2000;
+  }); return lastMillenniumMovies;
+} console.log(onlyInLastMillennium(movies));
 
 /* ESERCIZIO 16
   Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
 */
+function sumAllTheYears(movies) {
+const sum = movies.reduce((total, movie) => {
+ return total + parseInt(movie.Year, 10);
+  }, 0);  return sum;
+} console.log(sumAllTheYears(movies));
 
 /* ESERCIZIO 17
   Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
 */
+function searchByTitle(movies, title) {
+  const foundMovies = movies.filter(movie => movie.Title.includes(title));
+  return foundMovies;
+} console.log(searchByTitle(movies, 'Lord'));
 
 /* ESERCIZIO 18
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
@@ -166,17 +252,29 @@ deleteOne("ciao", false);
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
+function removeIndex(movies, index) {
+  const newMovies = movies.slice(0, index).concat(movies.slice(index + 1));
+ return newMovies;
+}
 
 // DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
 
 /* ESERCIZIO 20
   Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
 */
+function getContainerElement() {
+  const containerElement = document.getElementById('container');
+  return containerElement;
+} const container = getContainerElement();
 
 /* ESERCIZIO 21
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
-
+function getTdElements() {
+const tdElements = document.getElementsByTagName('td');
+ return tdElements;
+} const tdArray = getTdElements();
+ 
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
