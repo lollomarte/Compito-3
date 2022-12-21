@@ -18,7 +18,11 @@ REGOLE
 
 // ESERCIZIO B
  // Crea una variabile chiamata "random" e assegnaci un numero casuale tra 0 e 20 (deve essere generato dinamicamente a ogni esecuzione).
-
+let random = Math.random();
+random = random * 20;
+random = random % 20;
+random = Math.round(random); //Per me-----Rivedere Math.round che arrotonda il numero all'intero più vicino e spuntarla su lista ripassi
+console.log(random);
 
 // ESERCIZIO C
   //Crea una variabile chiamata "me" e assegnaci un oggetto contenente le seguenti proprietà: name = il tuo nome, surname = il tuo cognome, age = la tua età.
@@ -278,23 +282,44 @@ const tdElements = document.getElementsByTagName('td');
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
+function printTdText() {
+  let tdElements = document.getElementsByTagName("td");
+  for (let i = 0; i < tdElements.length; i++) {
+console.log(tdElements[i].textContent);
+  }
+}
 
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
+// Non riesco a farlo da rivedere, chiedere a Lidia e spuntare su lista cose da fare Epicode
 
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
+function addListItem() {
+  let list = document.getElementById("myList");
+  let newItem = document.createElement("li");
+  newItem.textContent = "Nuovo elemento";
+  list.appendChild(newItem);
+}
 
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
 */
-
+function clearList() {
+  let list = document.getElementById("myList");
+  list.innerHTML = "";
+}
 /* ESERCIZIO 26
   Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
 */
-
+function addTestClassToTr() {
+  let trElements = document.getElementsByTagName("tr");
+  for (let i = 0; i < trElements.length; i++) {
+    trElements[i].classList.add("test");
+  }
+}
 // [EXTRA] JS Avanzato
 
 /* ESERCIZIO 27
@@ -307,7 +332,11 @@ const tdElements = document.getElementsByTagName('td');
   **
   ***
 
-*/
+*/ function halfTree(height) {
+  for (let i = 1; i <= height; i++) {
+    console.log("*".repeat(i));
+  }
+} halfTree(3)
 
 /* ESERCIZIO 28
   Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
